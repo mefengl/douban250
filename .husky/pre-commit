@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+nbstripout dataset/*.ipynb && git add dataset/*.ipynb
+[[ -n "$(git diff --cached --exit-code)" ]] || (echo "No changes to commit" && exit 1)

@@ -1,0 +1,24 @@
+name: Auto deploy to server
+on: 
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    - run: npm ci
+    - run: npm run build
+    - name: Install SSH key
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+    - name: Create remote directory
+      run: ssh ${{ secrets.SSH_USER }}@${{ secrets.HOST }} mkdir -p weread/douban250/public
+    - name: rsync over SSH
+      run: rsync --recursive ./out/ ${{ secrets.SSH_USER }}@${{ secrets.HOST }}:weread/douban250/public/

@@ -1,5 +1,9 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
-
+if ! command -v nbstripout &> /dev/null
+then
+    echo "nbstripout is not installed, installing it now"
+    pip install nbstripout
+fi
 nbstripout dataset/*.ipynb && git add dataset/*.ipynb
 [[ -n "$(git diff --cached --exit-code)" ]] || (echo "No changes to commit" && exit 1)

@@ -18,18 +18,17 @@ export default function Home() {
   return (
     <div className='flex flex-col gap-5 px-6 py-4'>
       <h1 className='sr-only'>豆瓣250</h1>
-      <div className='whitespace-nowrap flex flex-col gap-2'>
+      <div className='whitespace-nowrap flex flex-col gap-4 sm:gap-2'>
         {data.map((book, i) =>
-          <div key={i} className='w-96 flex items-center gap-4'>
-            <input type='checkbox' checked={book.check}
-              className='sm:w-4 sm:h-4 checked:bg-neutral-200 shrink-0 w-5 h-5 transition-colors border rounded-sm appearance-none cursor-pointer'
-              onChange={() => {
-                const newData = [...data]
-                newData[i].check = !newData[i].check
-                setData(newData)
-                localStorage.setItem('book_list', JSON.stringify(newData))
-              }}
-            />
+          <div key={i} className='w-96 flex items-center gap-4 cursor-pointer'
+            onClick={() => {
+              const newData = [...data]
+              newData[i].check = !newData[i].check
+              setData(newData)
+              localStorage.setItem('book_list', JSON.stringify(newData))
+            }}
+          >
+            <input type='checkbox' checked={book.check} className='sm:w-4 sm:h-4 checked:bg-neutral-200 shrink-0 w-5 h-5 transition-colors border rounded-sm appearance-none cursor-pointer' />
             <div className={`text-xl sm:text-base ${book.check && 'text-neutral-400'}`}>{book.title}</div>
             <div className={`text-xl sm:text-base ${book.check ? 'text-neutral-400' : 'text-neutral-600'}`}>{book.author}</div>
           </div>

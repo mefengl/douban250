@@ -8,11 +8,10 @@ export default function Home() {
 
   useEffect(() => {
     const localData: Book[] = JSON.parse(localStorage.getItem('book_list') || '[]')
-    const oldCheck = localData.filter(book => book.check).map(book => book.title + book.author)
-    setData(book_list.map(book =>
-      oldCheck.includes(book.title + book.author)
-        ? { ...book, check: true }
-        : book
+    const oldCheck = localData.filter(book => book.check).map(book => book.title)
+    setData(book_list.map(book => oldCheck.includes(book.title)
+      ? { ...book, check: true }
+      : book
     ))
   }, [])
 

@@ -29,7 +29,6 @@ export default function Home() {
             }} >
             <input type='checkbox' checked={movie.check} className='sm:w-4 sm:h-4 checked:hidden shrink-0 w-5 h-5 border rounded-sm appearance-none cursor-pointer' />
             <div className={`text-xl sm:text-base ${movie.check && 'text-neutral-400 line-through'}`}>{movie.title}</div>
-            <div className={`text-xl sm:text-base ${movie.check ? 'text-neutral-300' : 'text-neutral-600'}`}>{movie.author}</div>
           </div>
         )}
       </div>

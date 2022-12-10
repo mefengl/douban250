@@ -1,7 +1,8 @@
+import Image from 'next/image';
 import { useEffect, useState } from 'react'
 import movie_list from './movie_list.json'
 
-type Movie = { title: string; check: boolean }
+type Movie = { title: string; cover: string; check: boolean; }
 
 export default function Home() {
   const [data, setData] = useState<Movie[]>([]);
@@ -28,6 +29,7 @@ export default function Home() {
               localStorage.setItem('movie_list', JSON.stringify(newData));
             }} >
             <input type='checkbox' checked={movie.check} className='sm:w-4 sm:h-4 checked:hidden shrink-0 w-5 h-5 border rounded-sm appearance-none cursor-pointer' />
+            <Image alt={movie.title} src={movie.cover} width={100} height={150} />
             <div className={`text-xl sm:text-base ${movie.check && 'text-neutral-400 line-through'}`}>{movie.title}</div>
           </div>
         )}

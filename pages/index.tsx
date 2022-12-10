@@ -35,7 +35,12 @@ export default function Home() {
           </div>
         )}
       </div>
-      <div className='text-neutral-500 font-serif text-xl font-bold'>豆瓣250 <span className='text-neutral-600'>{data.filter(book => book.check).length}/250</span></div>
+      {data.length && <div className='text-neutral-500 font-serif text-xl font-bold'>
+        豆瓣250
+        <span className='text-neutral-600'>
+          {data.filter(book => book.check).length}/250
+        </span>
+      </div>}
     </div>
   )
 }

@@ -1,8 +1,6 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run lint
-
 if ! command -v nbstripout &> /dev/null
 then
     echo "nbstripout is not installed, installing it now"

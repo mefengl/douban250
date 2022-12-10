@@ -22,7 +22,7 @@ export default function Home() {
         {data.map((book, i) =>
           <div key={i} className='w-96 flex items-center gap-4'>
             <input type='checkbox' checked={book.check}
-              className='appearance-none w-5 h-5 sm:w-4 sm:h-4 cursor-pointer border checked:bg-neutral-200 transition-colors rounded-sm shrink-0'
+              className='sm:w-4 sm:h-4 checked:bg-neutral-200 shrink-0 w-5 h-5 transition-colors border rounded-sm appearance-none cursor-pointer'
               onChange={() => {
                 const newData = [...data]
                 newData[i].check = !newData[i].check
@@ -35,12 +35,14 @@ export default function Home() {
           </div>
         )}
       </div>
-      {data.length && <div className='text-neutral-500 font-serif text-xl font-bold'>
-        豆瓣250
-        <span className='text-neutral-600'>
-          {data.filter(book => book.check).length}/250
-        </span>
-      </div>}
+      {!data.length ? ""
+        : <div className='text-neutral-500 font-serif text-xl font-bold'>
+          豆瓣250
+          <span className='text-neutral-600'>
+            {data.filter(book => book.check).length}/250
+          </span>
+        </div>
+      }
     </div>
   )
 }

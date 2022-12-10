@@ -1,12 +1,19 @@
 import { useEffect, useState } from 'react'
 import book_list from './book_list.json'
 
+type Book = { title: string; author: string; check: boolean }
+
 export default function Home() {
-  const [data, setData] = useState(book_list)
+  const [data, setData] = useState<Book[]>([])
 
   useEffect(() => {
-    const localData = localStorage.getItem('book_list')
-    localData && setData(JSON.parse(localData))
+    const localData: Book[] = JSON.parse(localStorage.getItem('book_list') || '[]')
+    const oldCheck = localData.filter(book => book.check).map(book => book.title + book.author)
+    setData(book_list.map(book =>
+      oldCheck.includes(book.title + book.author)
+        ? { ...book, check: true }
+        : book
+    ))
   }, [])
 
   return (
